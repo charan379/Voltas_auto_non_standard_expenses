@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="main_Flowchart" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="624,701" sap2010:WorkflowViewState.IdRef="main_Flowchart_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="main_Flowchart" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="712,701" sap2010:WorkflowViewState.IdRef="main_Flowchart_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
       <x:String>System.Activities</x:String>
@@ -27,6 +27,8 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -59,11 +61,10 @@
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="main_Flowchart" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
-      <Variable x:TypeArguments="x:String" Name="sa_type" />
-      <Variable x:TypeArguments="x:String" Name="uid" />
-      <Variable x:TypeArguments="x:String" Name="upass" />
-      <Variable x:TypeArguments="x:String" Name="csvFile" />
-      <Variable x:TypeArguments="sd:DataTable" Name="expData" />
+      <Variable x:TypeArguments="x:String" Name="a_sa_type" />
+      <Variable x:TypeArguments="x:String" Name="a_uid" />
+      <Variable x:TypeArguments="x:String" Name="a_upass" />
+      <Variable x:TypeArguments="x:String" Name="a_csvFile" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -84,10 +85,11 @@
           <av:PointCollection x:Key="ConnectorLocation">350,140 320,140 320,129.52 200,129.52</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke read_csv workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="read_csv.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke read_csv workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="read_csv.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="x:String" x:Key="csvFile" />
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="expData" />
+          <OutArgument x:TypeArguments="x:String" x:Key="csvFile">
+            <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="a_csvFile" />
+          </OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -106,7 +108,15 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Input_creads_and_sa_type workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Input_creads_and_sa_type.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              <OutArgument x:TypeArguments="x:String" x:Key="sa_type">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="a_sa_type" />
+              </OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="uid">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="a_uid" />
+              </OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="upass">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="a_upass" />
+              </OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -125,15 +135,15 @@
               </sap:WorkflowViewStateService.ViewState>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke login_into_crm_voltas workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="login_into_crm_voltas.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InOutArgument x:TypeArguments="x:String" x:Key="sa_type">
-                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="sa_type" />
-                  </InOutArgument>
-                  <InOutArgument x:TypeArguments="x:String" x:Key="uid">
-                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="uid" />
-                  </InOutArgument>
-                  <InOutArgument x:TypeArguments="x:String" x:Key="upass">
-                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="upass" />
-                  </InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="sa_type">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="a_sa_type" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="uid">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="a_uid" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="upass">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="a_upass" />
+                  </InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -149,16 +159,13 @@
                       <av:Size x:Key="ShapeSize">200,51</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke non_standard_process workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="non_standard_process.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke non_standard_process workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="non_standard_process.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="x:String" x:Key="sa_type">
-                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="sa_type" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="sd:DataTable" x:Key="expData">
-                        <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="expData" />
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="a_sa_type" />
                       </InArgument>
                       <InArgument x:TypeArguments="x:String" x:Key="csvFile">
-                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="csvFile" />
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="a_csvFile" />
                       </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                     <sap:WorkflowViewStateService.ViewState>
