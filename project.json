@@ -3,6 +3,7 @@
   "description": "Automatically creates non standard expenses in voltas CRM from a CSV file\r\nworks for Both SF and SSD",
   "main": "main_Flowchart.xaml",
   "dependencies": {
+    "UiPath.Database.Activities": "[1.5.0]",
     "UiPath.Excel.Activities": "[2.11.4]",
     "UiPath.Mail.Activities": "[1.12.3]",
     "UiPath.System.Activities": "[21.10.3]",
