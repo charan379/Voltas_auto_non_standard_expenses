@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>829,1187</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>979,1618</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>sqlConnect_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="62">
@@ -88,7 +88,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="947,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Connecting To Data Base&quot;]" />
     <ui:DatabaseConnect DisplayName="Connect to DB" sap:VirtualizedContainerService.HintSize="947,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="Dsn=voltas" DatabaseConnection="[Out_DbConnection]" />
-    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[Area_exists]" DisplayName="Check if table exists" ExistingDbConnection="[Out_DbConnection]" sap:VirtualizedContainerService.HintSize="947,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT COUNT(*)&#xD;&#xA;FROM information_schema.tables &#xD;&#xA;WHERE table_schema = 'voltas' &#xD;&#xA;AND table_name = 'area';">
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[Area_exists]" DisplayName="Check if table exists" ExistingDbConnection="[Out_DbConnection]" sap:VirtualizedContainerService.HintSize="947,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT COUNT(*)&#xA;FROM information_schema.tables &#xA;WHERE table_schema = 'voltas' &#xA;AND table_name = 'area';">
       <ui:ExecuteQuery.Parameters>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:ExecuteQuery.Parameters>
@@ -102,7 +102,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Area table not found in database creating new table&quot;]" />
-          <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Area]" CommandType="Text" DisplayName="Create new Table" ExistingDbConnection="[Out_DbConnection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" Sql="CREATE TABLE If Not EXISTS voltas.area(&#xD;&#xA;    pincode VARCHAR(50),&#xD;&#xA;    fname VARCHAR(50),&#xD;&#xA;    fcode VARCHAR(50),&#xD;&#xA;    dist VARCHAR(50),&#xD;&#xA;    city VARCHAR(50),&#xD;&#xA;    area VARCHAR(50),&#xD;&#xA;    areatype VARCHAR(50),&#xD;&#xA;    brand varchar(50),&#xD;&#xA;    kms VARCHAR(50),&#xD;&#xA;    tada VARCHAR(50),&#xD;&#xA;    tech VARCHAR(50)&#xD;&#xA;);">
+          <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Area]" CommandType="Text" DisplayName="Create new Table" ExistingDbConnection="[Out_DbConnection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" Sql="CREATE TABLE If Not EXISTS voltas.area(&#xA;    pincode VARCHAR(50),&#xA;    fname VARCHAR(50),&#xA;    fcode VARCHAR(50),&#xA;    dist VARCHAR(50),&#xA;    city VARCHAR(50),&#xA;    area VARCHAR(50),&#xA;    areatype VARCHAR(50),&#xA;    brand varchar(50),&#xA;    kms VARCHAR(50),&#xA;    tada VARCHAR(50),&#xA;    tech VARCHAR(50)&#xA;);">
             <ui:ExecuteNonQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteNonQuery.Parameters>
@@ -120,7 +120,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Area table already found waiting for user choice&quot;]" />
-          <ui:InputDialog OptionsString="{x:Null}" DisplayName="User Input For SQL" sap:VirtualizedContainerService.HintSize="484,291" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Do You want to continue with it or update table" Options="[{&quot;Continue&quot;,&#xD;&#xA;&quot;Update&quot;}]" Title="Area Table already found">
+          <ui:InputDialog OptionsString="{x:Null}" DisplayName="User Input For SQL" sap:VirtualizedContainerService.HintSize="484,291" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Do You want to continue with it or update table" Options="[{&quot;Continue&quot;,&#xA;&quot;Update&quot;}]" Title="Area Table already found">
             <ui:InputDialog.Result>
               <OutArgument x:TypeArguments="x:String">[SqlChoice]</OutArgument>
             </ui:InputDialog.Result>
@@ -135,9 +135,7 @@
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke UpdateSQLtableArea workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="UpdateSQLtableArea.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
-                    <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="In_DBconnection">
-                      <mva:VisualBasicValue x:TypeArguments="ui:DatabaseConnection" ExpressionText="Out_DbConnection" />
-                    </InArgument>
+                    <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="In_DBconnection">[Out_DbConnection]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </Sequence>
